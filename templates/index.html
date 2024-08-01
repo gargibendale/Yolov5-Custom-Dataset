@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: auto;
+            /* Allow the body to scroll */
+        }
+
+        /* Pseudo-element for background image with opacity */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/static/red_poppy.jpg') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #resultImage {
+            width: 100%;
+            max-width: 500px;
+            /* Set a maximum width for the image */
+            height: auto;
+            /* Maintain aspect ratio */
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        #maindiv {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: white;
+            fill-opacity: 0.6;
+            border-radius: 25px;
+            padding: 20px 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="maindiv">
+        <h1>Flower Detection</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Detect Flowers :)</button>
+        </form>
+        <div id="result">
+            <img id="resultImage" src="" alt="Result Image" />
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/detect', {
+                method: 'POST',
+                body: formData
+            });
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            document.getElementById('resultImage').src = url;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
