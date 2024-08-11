@@ -13,7 +13,9 @@ I've also written the code for testing it on a single inference and also to perm
 
 Ultralytics docs - [Train on custom data](https://docs.ultralytics.com/yolov5/tutorials/train_custom_data/#faq)
 
-Dataset link - [Flowers_Classification](https://public.roboflow.com/classification/flowers_classification/2)
+Dataset link - [Flowers_Classification](<a href="https://universe.roboflow.com/myworkspace-r3ka3/flowers_detection-fh5pt">
+    <img src="https://app.roboflow.com/images/download-dataset-badge.svg"></img>)
+</a>)
 
 ## Demo 
 ![Screenshot (393)](https://github.com/user-attachments/assets/7df57ec9-ad6f-45fb-beea-b1d46281e12a)
